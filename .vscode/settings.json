@@ -1,6 +1,12 @@
 {
   "files.autoSave": "onWindowChange",
   "editor.tabSize": 2,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
