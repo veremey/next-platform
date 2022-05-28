@@ -5,7 +5,8 @@
     "@typescript-eslint"
   ],
   "rules": {
-    "semi": "on",
+    "space-in-brackets": ["error", "always"],
+    "semi": ["error", "never"],
     "@typescript-eslint/semi": [
       "warn"
     ],
