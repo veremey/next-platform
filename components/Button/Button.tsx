@@ -1,19 +1,26 @@
 import { ButtonProps } from './Button.props'
-import styles from './Button.module.scss'
-import cn from classnames
+import cn from 'classnames'
+import IconArrow from './images/arrow.svg'
 
-export const Htag = ({appearance, children} :ButtonProps):JSX.Element => {
+import styles from './Button.module.scss'
+
+export const Button = ({ appearance, arrow = 'none', children, className, ...props }: ButtonProps): JSX.Element => {
   return (
-    switch (tag) {
-      case 'h1': 
-        return <button className={styles.button}>{children}</button>
-      case 'h2': 
-        return <h2 className={styles.h2}>{children}</h2>
-      case 'h3': 
-        return <h3 className={styles.h3}>{children}</h3>
-      default:
-        return <></>
-    }
+    <button
+      className={cn(styles.button, className, {
+        [styles.primary]: appearance === 'primary',
+        [styles.ghost]: appearance === 'ghost',
+      })}
+      {...props}
+    >
+      {children}
+      {arrow != 'none' && (
+        <IconArrow
+          className={cn(styles.arrow, {
+            [styles.down]: arrow == 'down',
+          })}
+        />
+      )}
+    </button>
   )
 }
-  

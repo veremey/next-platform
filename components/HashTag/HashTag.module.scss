@@ -1,0 +1,46 @@
+.hashTag {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  line-height: 12px;
+
+  & + & {
+    margin-left: 5px;
+  }
+}
+
+.m {
+  font-size: 14px;
+  line-height: 14px;
+}
+
+.ghost {
+  border: 1px solid var(--gray-light);
+}
+
+.red {
+  color: var(--white);
+  background-color: #de0000;
+  font-weight: bold;
+}
+
+.grey {
+  color: var(--white);
+  background-color: #b3c0d9;
+  font-weight: bold;
+}
+
+.green {
+  color: var(--gren);
+  background-color: var(--gray-light);
+
+  font-weight: bold;
+}
+
+.primary {
+  color: var(--primary);
+  background: none;
+  border: 1px solid var(--primary);
+}
