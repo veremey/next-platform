@@ -1,0 +1,19 @@
+.star {
+  display: inline-block;
+  vertical-align: top;
+  width: 20px;
+  height: 20px;
+  fill: var(--gray-light);
+
+  & * & {
+    margin-left: 5px;
+  }
+}
+
+.filled {
+  fill: var(--primary);
+}
+
+.editable {
+  cursor: pointer;
+}

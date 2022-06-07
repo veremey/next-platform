@@ -1,8 +1,8 @@
 module.exports = {
   webpack(config, options) {
     config.module.rules.push({
-      test: /\.svg$/i,
-      issuer: { and: [/\.(js|ts|md)x?$/] },
+      test: /\.svg$/,
+      issuer: { and: [/\.(js|ts)x?$/] },
       use: [
         {
           loader: '@svgr/webpack',

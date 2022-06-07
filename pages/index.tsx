@@ -1,8 +1,11 @@
-import { Htag, Ptag } from './../components'
+import { useState } from 'react'
+import { Htag, Ptag, Rating } from './../components'
 import { Button } from './../components'
 import { HashTag } from './../components'
 
 export default function Home(): JSX.Element {
+  const [rating, setRating] = useState<number>(4)
+
   return (
     <div>
       <Htag tag="h1">text Livereload</Htag>
@@ -24,6 +27,8 @@ export default function Home(): JSX.Element {
       <HashTag size="s" color="primary">
         Маленький
       </HashTag>
+
+      <Rating rating={rating} isEditable setRating={setRating} />
     </div>
   )
 }
