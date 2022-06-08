@@ -2,12 +2,13 @@ import { useState } from 'react'
 import { Htag, Ptag, Rating } from './../components'
 import { Button } from './../components'
 import { HashTag } from './../components'
+import { Layout } from './../HOC/Layout/Layout'
 
 export default function Home(): JSX.Element {
   const [rating, setRating] = useState<number>(4)
 
   return (
-    <div>
+    <Layout>
       <Htag tag="h1">text Livereload</Htag>
       <Button appearance="primary" arrow="right">
         Кнопка
@@ -29,6 +30,6 @@ export default function Home(): JSX.Element {
       </HashTag>
 
       <Rating rating={rating} isEditable setRating={setRating} />
-    </div>
+    </Layout>
   )
 }
