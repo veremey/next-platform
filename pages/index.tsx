@@ -1,10 +1,12 @@
+import { GetStaticProps } from 'next'
 import { useState } from 'react'
 import { Htag, Ptag, Rating } from './../components'
 import { Button } from './../components'
 import { HashTag } from './../components'
 import { withLayout } from './../HOC/withLayout'
+import axios from 'axios'
 
-function Home(): JSX.Element {
+function Home({menu}): JSX.Element {
   const [rating, setRating] = useState<number>(4)
 
   return (
@@ -30,8 +32,35 @@ function Home(): JSX.Element {
         Маленький
       </HashTag>
       <Rating rating={rating} isEditable setRating={setRating} />
+      <ul>
+        {menu.map( m => (
+          <li key={menu._id.secondCategory}>
+            {m._id.secondCategory}
+          </li>
+        )}
+      </ul>
     </>
   )
 }
 
 export default withLayout(Home)
+
+export const getStaticProps: GetStaticProps = async () => {
+  const firstCategory = 0
+  const { data: menu } = await axios.post<PageProps>(process.env.NEXT_PUBLIC_DOMAIN, {
+    firstCategory 
+  })
+
+  return {
+    props: {
+      menu,
+      firstCategory,
+    },
+  }
+}
+
+interface HomeProps extends Record<string, unknown> {
+  menu: PageProps
+  firstCategory: number  
+  }
+

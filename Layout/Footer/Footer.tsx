@@ -1,5 +1,5 @@
 import { FooterProps } from './Footer.props'
-import { Ptag } from '../Ptag/Ptag'
+import { Ptag } from '../../components/Ptag/Ptag'
 import { format } from 'date-fns'
 import cn from 'classnames'
 
