@@ -1,12 +1,13 @@
 import { GetStaticProps } from 'next'
 import { useState } from 'react'
+import axios from 'axios'
 import { Htag, Ptag, Rating } from './../components'
 import { Button } from './../components'
 import { HashTag } from './../components'
-import { withLayout } from './../HOC/withLayout'
-import axios from 'axios'
+import { withLayout } from './../HOC/WithLayout'
+import { MenuItem } from './../interfaces/menu.interface'
 
-function Home({menu}): JSX.Element {
+function Home({ menu }: HomeProps): JSX.Element {
   const [rating, setRating] = useState<number>(4)
 
   return (
@@ -33,11 +34,9 @@ function Home({menu}): JSX.Element {
       </HashTag>
       <Rating rating={rating} isEditable setRating={setRating} />
       <ul>
-        {menu.map( m => (
-          <li key={menu._id.secondCategory}>
-            {m._id.secondCategory}
-          </li>
-        )}
+        {menu.map((m) => (
+          <li key={m.id}>{m.title}</li>
+        ))}
       </ul>
     </>
   )
@@ -46,21 +45,15 @@ function Home({menu}): JSX.Element {
 export default withLayout(Home)
 
 export const getStaticProps: GetStaticProps = async () => {
-  const firstCategory = 0
-  const { data: menu } = await axios.post<PageProps>(process.env.NEXT_PUBLIC_DOMAIN, {
-    firstCategory 
-  })
+  const { data: menu } = await axios.get<MenuItem[]>('https://jsonplaceholder.typicode.com/posts')
 
   return {
     props: {
       menu,
-      firstCategory,
     },
   }
 }
 
 interface HomeProps extends Record<string, unknown> {
-  menu: PageProps
-  firstCategory: number  
-  }
-
+  menu: MenuItem[]
+}

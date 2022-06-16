@@ -1,35 +1,17 @@
-export interface Id {
-  secondCategory: string
-}
-
-export interface Page {
-  alias: string
+export interface PageItem {
+  id: number
+  name: string
   title: string
-  _id: string
-  category: string
+  alias: string
+  categoryId: number
+  tags: string[]
 }
 
-export interface Menu {
-  _id: {
-    secondCategory: string
-  }
-  pages: Page[]
-}
-
-export interface Domain {
-  id: string
-  city: string
-  inCity: string
-}
-
-export interface PageProps {
-  menu: Menu[]
-  firstCategory: number
-  domain?: any
-  domains: Domain[]
-}
-
-export interface RootObject {
-  pageProps: PageProps
-  __N_SSG: boolean
+export interface MenuItem {
+  id: number
+  title: string
+  section?: string
+  name?: string
+  alias?: string
+  group?: PageItem[]
 }
