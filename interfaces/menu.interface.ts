@@ -1,17 +1,13 @@
 export interface PageItem {
-  id: number
-  name: string
-  title: string
   alias: string
-  categoryId: number
-  tags: string[]
+  title: string
+  _id: string
+  category: string
 }
 
 export interface MenuItem {
-  id: number
-  title: string
-  section?: string
-  name?: string
-  alias?: string
-  group?: PageItem[]
+  _id: {
+    secondCategory: string
+  }
+  pages: PageItem[]
 }

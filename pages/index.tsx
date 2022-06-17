@@ -35,7 +35,7 @@ function Home({ menu }: HomeProps): JSX.Element {
       <Rating rating={rating} isEditable setRating={setRating} />
       <ul>
         {menu.map((m) => (
-          <li key={m.id}>{m.name}</li>
+          <li key={m._id}>{m._id.secondCategory}</li>
         ))}
       </ul>
     </>
@@ -45,15 +45,21 @@ function Home({ menu }: HomeProps): JSX.Element {
 export default withLayout(Home)
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data: menu } = await axios.get<MenuItem[]>(process.env.NEXT_PUBLIC_DOMAIN)
+  const firstCategory = 0
+
+  const { data: menu } = await axios.post<MenuItem[]>(process.env.NEXT_PUBLIC_DOMAIN + 'top-page/find', {
+    firstCategory,
+  })
 
   return {
     props: {
       menu,
+      firstCategory,
     },
   }
 }
 
 interface HomeProps extends Record<string, unknown> {
   menu: MenuItem[]
+  firstCategory: number
 }
