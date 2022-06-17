@@ -35,7 +35,7 @@ function Home({ menu }: HomeProps): JSX.Element {
       <Rating rating={rating} isEditable setRating={setRating} />
       <ul>
         {menu.map((m) => (
-          <li key={m.id}>{m.title}</li>
+          <li key={m.id}>{m.name}</li>
         ))}
       </ul>
     </>
@@ -45,7 +45,7 @@ function Home({ menu }: HomeProps): JSX.Element {
 export default withLayout(Home)
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data: menu } = await axios.get<MenuItem[]>('https://jsonplaceholder.typicode.com/posts')
+  const { data: menu } = await axios.get<MenuItem[]>(process.env.NEXT_PUBLIC_DOMAIN)
 
   return {
     props: {
