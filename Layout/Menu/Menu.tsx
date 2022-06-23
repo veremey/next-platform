@@ -50,13 +50,15 @@ const Menu = () => {
         {menu.map((SMLItem) => (
           <div key={SMLItem._id.secondCategory}>
             <div className={styles.secondLevel}>{SMLItem._id.secondCategory}</div>
-            <div className={cn(styles.secondLevelBlock, {
-              [styles.secondLevelBlockOpened]: SMLItem.isOpened
-            })}>
+            <div
+              className={cn(styles.secondLevelBlock, {
+                [styles.secondLevelBlockOpened]: SMLItem.isOpened,
+              })}
+            >
               {buildThirdLevelMenu(SMLItem.pages, FLMItem.route)}
             </div>
           </div>
-        )}
+        ))}
       </>
     )
   }
@@ -65,14 +67,16 @@ const Menu = () => {
     return (
       <>
         {pages.map((page) => (
-          <a href={`/${route}/${page.alias}`}
+          <a
+            key={page._id}
+            href={`/${route}/${page.alias}`}
             className={cn(styles.thirdLevel, {
-              [styles.thirdLevelActive]: true // TODO
+              [styles.thirdLevelActive]: true, // TODO
             })}
           >
             {page.category}
           </a>
-        )}
+        ))}
       </>
     )
   }
