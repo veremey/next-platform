@@ -53,7 +53,7 @@ const Menu = () => {
             <div
               className={cn(styles.secondLevelBlock, {
                 [styles.secondLevelBlockOpened]: SMLItem.isOpened,
-              })} // TODO
+              })} // TODO .
             >
               {buildThirdLevelMenu(SMLItem.pages, FLMItem.route)}
             </div>
