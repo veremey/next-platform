@@ -11,6 +11,8 @@ import BooksIcon from './icons/books.svg'
 import ProductsIcon from './icons/products.svg'
 
 import styles from './Menu.module.scss'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const firstLevelMenu: FirstLevelMenuItem[] = [
   { route: 'courses', name: 'Курсы', icon: <CoursesIcon />, id: TopLevelCategory.Courses },
@@ -21,22 +23,37 @@ const firstLevelMenu: FirstLevelMenuItem[] = [
 
 const Menu = () => {
   const { menu, firstCategory, setMenu } = useContext(AppContext)
+  const router = useRouter()
+
+  const openSecondLevel = (secondCategory: string) => {
+    setMenu &&
+      setMenu(
+        menu.map((m) => {
+          if (m._id.secondCategory === secondCategory) {
+            m.isOpened = !m.isOpened
+          }
+          return m
+        })
+      )
+  }
 
   const buildFirstLevelMenu = () => {
     return (
       <>
         {firstLevelMenu.map((FLMItem) => (
           <div key={FLMItem.route}>
-            <a href={`/${FLMItem.route}`}>
-              <div
-                className={cn(styles.firstLevel, {
-                  [styles.firstLevelActive]: FLMItem.id === firstCategory,
-                })}
-              >
-                {FLMItem.icon}
-                <span>{FLMItem.name}</span>
-              </div>
-            </a>
+            <Link href={`/${FLMItem.route}`}>
+              <a>
+                <div
+                  className={cn(styles.firstLevel, {
+                    [styles.firstLevelActive]: FLMItem.id === firstCategory,
+                  })}
+                >
+                  {FLMItem.icon}
+                  <span>{FLMItem.name}</span>
+                </div>
+              </a>
+            </Link>
             {FLMItem.id === firstCategory && buildSecondMenuLevelItem(FLMItem)}
           </div>
         ))}
@@ -47,18 +64,25 @@ const Menu = () => {
   const buildSecondMenuLevelItem = (FLMItem: FirstLevelMenuItem) => {
     return (
       <>
-        {menu.map((SMLItem) => (
-          <div key={SMLItem._id.secondCategory}>
-            <div className={styles.secondLevel}>{SMLItem._id.secondCategory}</div>
-            <div
-              className={cn(styles.secondLevelBlock, {
-                [styles.secondLevelBlockOpened]: SMLItem.isOpened,
-              })} // TODO .git
-            >
-              {buildThirdLevelMenu(SMLItem.pages, FLMItem.route)}
+        {menu.map((SMLItem) => {
+          if (SMLItem.pages.map((p) => p.alias).includes(router.asPath.split('.')[2])) {
+            SMLItem.isOpened = true
+          }
+          return (
+            <div key={SMLItem._id.secondCategory}>
+              <div className={styles.secondLevel} onClick={() => openSecondLevel(SMLItem._id.secondCategory)}>
+                {SMLItem._id.secondCategory}
+              </div>
+              <div
+                className={cn(styles.secondLevelBlock, {
+                  [styles.secondLevelBlockOpened]: SMLItem.isOpened,
+                })}
+              >
+                {buildThirdLevelMenu(SMLItem.pages, FLMItem.route)}
+              </div>
             </div>
-          </div>
-        ))}
+          )
+        })}
       </>
     )
   }
@@ -67,15 +91,15 @@ const Menu = () => {
     return (
       <>
         {pages.map((page) => (
-          <a
-            key={page._id}
-            href={`/${route}/${page.alias}`}
-            className={cn(styles.thirdLevel, {
-              [styles.thirdLevelActive]: true, // TODO
-            })}
-          >
-            {page.category}
-          </a>
+          <Link key={page._id} href={`/${route}/${page.alias}`}>
+            <a
+              className={cn(styles.thirdLevel, {
+                [styles.thirdLevelActive]: `/${route}/${page.alias}` === router.asPath,
+              })}
+            >
+              {page.category}
+            </a>
+          </Link>
         ))}
       </>
     )
