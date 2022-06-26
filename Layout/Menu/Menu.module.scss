@@ -1,5 +1,13 @@
 .menu {
   margin-top: 20px;
+
+  svg {
+    display: inline-block;
+    vertical-align: top;
+    width: 20px;
+    height: 24px;
+    fill: var(--green);
+  }
 }
 
 .firstLevel {
@@ -16,7 +24,7 @@
 .firstLevel:hover {
   color: var(--primary);
 
-  .svg {
+  svg {
     fill: var(--primary);
   }
 }

@@ -63,7 +63,7 @@ const Menu = () => {
 
   const buildSecondMenuLevelItem = (FLMItem: FirstLevelMenuItem) => {
     return (
-      <>
+      <div className={styles.secondBlock}>
         {menu.map((SMLItem) => {
           if (SMLItem.pages.map((p) => p.alias).includes(router.asPath.split('.')[2])) {
             SMLItem.isOpened = true
@@ -83,35 +83,25 @@ const Menu = () => {
             </div>
           )
         })}
-      </>
+      </div>
     )
   }
 
   const buildThirdLevelMenu = (pages: PageItem[], route: string) => {
-    return (
-      <>
-        {pages.map((page) => (
-          <Link key={page._id} href={`/${route}/${page.alias}`}>
-            <a
-              className={cn(styles.thirdLevel, {
-                [styles.thirdLevelActive]: `/${route}/${page.alias}` === router.asPath,
-              })}
-            >
-              {page.category}
-            </a>
-          </Link>
-        ))}
-      </>
-    )
+    return pages.map((page) => (
+      <Link key={page._id} href={`/${route}/${page.alias}`}>
+        <a
+          className={cn(styles.thirdLevel, {
+            [styles.thirdLevelActive]: `/${route}/${page.alias}` === router.asPath,
+          })}
+        >
+          {page.category}
+        </a>
+      </Link>
+    ))
   }
 
-  return (
-    <ul>
-      {menu.map((m) => (
-        <li key={m._id.secondCategory}>{m._id.secondCategory}</li>
-      ))}
-    </ul>
-  )
+  return <ul className={styles.menu}>{buildFirstLevelMenu()}</ul>
 }
 
 export default Menu
