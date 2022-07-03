@@ -1,9 +1,16 @@
-import { HashTag } from './HashTag.props'
+import { HashTagProps } from './HashTag.props'
 import cn from 'classnames'
 
 import styles from './HashTag.module.scss'
 
-export const HashTag = ({ size = 'm', color = 'ghost', href, children, className, ...props }: HashTag): JSX.Element => {
+export const HashTag = ({
+  size = 'm',
+  color = 'ghost',
+  href,
+  children,
+  className,
+  ...props
+}: HashTagProps): JSX.Element => {
   return (
     <div
       className={cn(styles.hashTag, className, {
