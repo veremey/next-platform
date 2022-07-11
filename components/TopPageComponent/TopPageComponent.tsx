@@ -1,11 +1,10 @@
 import { Htag } from '../Htag/Htag'
 import { TopPageComponentProps } from './TopPageComponent.props'
-import { Ptag } from './../Ptag/Ptag'
 import { Card } from '../Card/Card'
 import { Ptag } from '../Ptag/Ptag'
+import { Advantages } from './../Advantages/Advantages'
 
 import styles from './TopPageComponent.module.css'
-import { Advantages } from './../Advantages/Advantages'
 
 export const TopPageComponent = ({ page, products, firstCategory }: TopPageComponentProps): JSX.Element => {
   return (
@@ -38,7 +37,11 @@ export const TopPageComponent = ({ page, products, firstCategory }: TopPageCompo
           <Advantages advantages={page.advantages} />
         </>
       )}
-      {page.seoText && <Ptag size="m">{page.seoText}</Ptag>}
+      {page.seoText && (
+        <div className={styles.seo} dangerouslySetInnerHTML={{ __html: page.seoText }}>
+          {page.seoText}
+        </div>
+      )}
       <Htag tag="h2">Полученные навыки</Htag>
       {page.tags.map((t) => (
         <Ptag key={t} size="m" color="primary">
