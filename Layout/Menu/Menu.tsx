@@ -57,7 +57,10 @@ const Menu = () => {
           }
           return (
             <div key={SMLItem._id.secondCategory}>
-              <div className={styles.secondLevel} onClick={() => openSecondLevel(SMLItem._id.secondCategory)}>
+              <div
+                className={styles.secondLevel}
+                onClick={() => openSecondLevel(SMLItem._id.secondCategory)}
+              >
                 {SMLItem._id.secondCategory}
               </div>
               <div

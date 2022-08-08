@@ -18,7 +18,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsContext<ParsedUrlQuery>) => {
+export const getStaticProps: GetStaticProps = async ({
+  params,
+}: GetStaticPropsContext<ParsedUrlQuery>) => {
   if (!params) {
     return {
       notFound: true,
@@ -32,9 +34,12 @@ export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsC
     }
   }
 
-  const { data: menu } = await axios.post<MenuItem[]>(process.env.NEXT_PUBLIC_DOMAIN + 'top-page/find', {
-    firstCategory: firstCategoryItem.id,
-  })
+  const { data: menu } = await axios.post<MenuItem[]>(
+    process.env.NEXT_PUBLIC_DOMAIN + 'top-page/find',
+    {
+      firstCategory: firstCategoryItem.id,
+    }
+  )
 
   return {
     props: {

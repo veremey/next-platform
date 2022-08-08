@@ -12,9 +12,12 @@ export default withLayout(Search)
 export const getStaticProps: GetStaticProps = async () => {
   const firstCategory = 0
 
-  const { data: menu } = await axios.post<MenuItem[]>(process.env.NEXT_PUBLIC_DOMAIN + 'top-page/find', {
-    firstCategory,
-  })
+  const { data: menu } = await axios.post<MenuItem[]>(
+    process.env.NEXT_PUBLIC_DOMAIN + 'top-page/find',
+    {
+      firstCategory,
+    }
+  )
 
   return {
     props: {
@@ -22,9 +25,4 @@ export const getStaticProps: GetStaticProps = async () => {
       firstCategory,
     },
   }
-}
-
-interface HomeProps extends Record<string, unknown> {
-  menu: MenuItem[]
-  firstCategory: number
 }

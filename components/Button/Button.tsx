@@ -4,7 +4,13 @@ import IconArrow from './images/arrow.svg'
 
 import styles from './Button.module.scss'
 
-export const Button = ({ appearance, arrow = 'none', children, className, ...props }: ButtonProps): JSX.Element => {
+export const Button = ({
+  appearance,
+  arrow = 'none',
+  children,
+  className,
+  ...props
+}: ButtonProps): JSX.Element => {
   return (
     <button
       className={cn(styles.button, className, {

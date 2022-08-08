@@ -6,7 +6,11 @@ import { Advantages } from './../Advantages/Advantages'
 
 import styles from './TopPageComponent.module.css'
 
-export const TopPageComponent = ({ page, products, firstCategory }: TopPageComponentProps): JSX.Element => {
+export const TopPageComponent = ({
+  page,
+  products,
+  firstCategory,
+}: TopPageComponentProps): JSX.Element => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.title}>
