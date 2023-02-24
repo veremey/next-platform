@@ -16,5 +16,5 @@ export const firstLevelMenu: FirstLevelMenuItem[] = [
 export const priceEuro = (price: number) =>
   priceEuro
     .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/d, ' ')
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
     .concat(' €')
